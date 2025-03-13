@@ -1,0 +1,87 @@
+/* Ensure the html and body take up full height */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Apply a gradient background to the body */
+body {
+  background: linear-gradient(to bottom right, #a67763, #f0e8e5);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #f0e8e5;
+}
+a {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #f0e8e5;
+}
+
+#countdown {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #6a5650;
+}
+
+#sponsorCount {
+  font-size: 3rem;
+  line-height: 1.5;
+  color: #6a5650;
+}
+
+.bg-custom1 {
+  background-color: #a67763;
+}
+
+.bg-custom2 {
+  background-color: #6a5650;
+}
+
+.bg-custom3 {
+  background-color: #b09382;
+}
+
+.bg-custom4 {
+  background-color: #436374;
+}
+
+.bg-custom5 {
+  background-color: #869aa3;
+}
+
+.bg-highlight1 {
+  background-color: #ff9786;
+}
+
+.bg-highlight2 {
+  background-color: #9e4d8b;
+}
+
+.bg-highlight3 {
+  background-color: #0077a8;
+}
+
+.bg-highlight4 {
+  background-color: #d9ae48;
+}
+
+.bg-floral1 {
+  background-color: #7091c8;
+}
+
+.bg-floral2 {
+  background-color: #a691b9;
+}
+
+.bg-floral3 {
+  background-color: #9b8a50;
+}
+
+.bg-floral4 {
+  background-color: #d39c97;
+}
+
+.bg-customwhite {
+  background-color: #f0e8e5;
+}

@@ -1,0 +1,45 @@
+{% extends "sponsorship_workflow/base.html" %} {% block title %}Sponsor
+Create{%endblock %} {% block head %} {{ block.super }}
+<style>
+  body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+  }
+</style>
+{% endblock %} {% block content %}
+<h1>Add New Sponsor</h1>
+
+<form method="POST" action="{% url 'add_sponsor' %}">
+  <div class="mb-3">
+    <label for="company_name" class="form-label">Company Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="company_name"
+      name="company_name"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="contact" class="form-label">Contact Name</label>
+    <input type="text" class="form-control" id="contact" name="contact" />
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control" id="email" name="email" />
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="form-label">Phone Number</label>
+    <input type="text" class="form-control" id="phone" name="phone" />
+  </div>
+  <div class="mb-3">
+    <label for="status" class="form-label">Status</label>
+    <input type="text" class="form-control" id="status" name="status" />
+  </div>
+  <div class="mb-3">
+    <label for="spend" class="form-label">Spend</label>
+    <input type="dropdown" class="form-control" id="spend" name="spend" />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="cancel" class="btn btn-primary">Cancel</button>
+</form>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "sponsorship_workflow/base.html" %} {% block content %}
+<div class="container mt-4">
+  <!-- Countdown Row -->
+  <div class="row pt-5">
+    <div class="col-12">
+      <div class="card mb-4">
+        <div class="card-header bg-custom1">March 26</div>
+        <div class="card-body text-center bg-customwhite">
+          <h3 id="countdown"></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Goal and Sponsor Count Row -->
+  <div class="row d-flex">
+    <!-- Monetary Goal Progress -->
+    <div class="col-md-8">
+      <div class="card h-100">
+        <div class="card-header bg-custom1">Monetary Goal Progress</div>
+        <div class="card-body bg-customwhite">
+          <canvas
+            id="progressChart"
+            width="200"
+            height="250"
+            style="font-size: 1rem; line-height: 1.5; color: #6a5650"
+          ></canvas>
+        </div>
+      </div>
+    </div>
+    <!-- Sponsor Counter -->
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-header bg-custom1">FY2025 Sponsors</div>
+        <div
+          class="card-body d-flex justify-content-center align-items-center bg-customwhite"
+        >
+          <!-- <h1 class="display-1" id="sponsorCount">{{ sponsors_count }}</h1> -->
+          <h1 class="display-1" id="sponsorCount">{{sponsor_count}}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Historical Comparisons Row -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card bg-charts">
+        <div class="card-header bg-custom1">Historical Comparisons</div>
+        <div class="card-body bg-customwhite">
+          <canvas id="historicalChart" width="350" height="250"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Include Chart.js from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  var totalSpend = "{{total_spend}}";
+  // Chart.js configuration for the doughnut chart
+  var ctx = document.getElementById("progressChart").getContext("2d");
+  var progressChart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ["Achieved - $" + totalSpend, "Remaining - $210,000"],
+      datasets: [
+        {
+          data: [540000, 210000], // Example values; adjust dynamically as needed.
+          backgroundColor: ["#9b8a50", "#A691B9"],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      title: {
+        display: true,
+      },
+    },
+  });
+
+  // Countdown Timer to March 26
+  function updateCountdown() {
+    var now = new Date();
+    var year = now.getFullYear();
+    // JavaScript months are 0-indexed: 2 represents March.
+    var target = new Date(year, 2, 26);
+    // If today's date is past March 26, set the target to next year's March 26.
+    if (now > target) {
+      target = new Date(year + 1, 2, 26);
+    }
+    var diff = target - now;
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Historical Triple Bar Chart for Total Money, Sponsor Dollars, and In Kind
+  var ctxHistorical = document
+    .getElementById("historicalChart")
+    .getContext("2d");
+  var historicalChart = new Chart(ctxHistorical, {
+    type: "bar",
+    data: {
+      labels: ["2021", "2022", "2023", "2024"], // Example historical categories
+      datasets: [
+        {
+          label: "Total Money",
+          data: [5000, 6000, 7000, 8000], // Replace with dynamic data as needed.
+          backgroundColor: "#869aa3",
+        },
+        {
+          label: "Sponsor Dollars",
+          data: [3000, 3500, 4000, 4500], // Replace with dynamic data as needed.
+          backgroundColor: "#9b8a50",
+        },
+        {
+          label: "In Kind",
+          data: [2000, 2500, 3000, 3500], // Replace with dynamic data as needed.
+          backgroundColor: "#D9AE48",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: "Historical Sponsorship Comparisons",
+        },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+</script>
+{% endblock %}
